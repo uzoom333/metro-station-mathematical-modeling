@@ -1,0 +1,6 @@
+extends: baseline.yaml
+metadata:
+  name: delayed_train
+  description: Extended illustrative train dwell with baseline passengers.
+train:
+  dwell_time_s: 240.0

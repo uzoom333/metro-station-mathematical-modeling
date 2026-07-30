@@ -1,0 +1,7 @@
+extends: baseline.yaml
+metadata:
+  name: ventilation_failure
+  description: Illustrative resilience scenario; not an emergency assessment.
+failure:
+  start_time_s: 1800.0
+  maximum_airflow_m3_s: 20.0

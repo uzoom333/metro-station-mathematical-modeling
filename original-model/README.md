@@ -1,5 +1,8 @@
 # Version 1: Original Model
 
+[← Back to Home](../README.md) ·
+[Explore Version 2 →](../remodeled-model/README.md)
+
 Version 1 faithfully reconstructs the mathematical modeling project that
 received fourth place in the Mathematical Modeling Challenge at the X Congress
 of Science, Technology and Innovation at PUC Goiás in 2024.

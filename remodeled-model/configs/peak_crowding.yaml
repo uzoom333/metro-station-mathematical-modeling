@@ -1,0 +1,8 @@
+extends: baseline.yaml
+metadata:
+  name: peak_crowding
+  description: Illustrative crowding peak and six-minute train intervals.
+occupancy:
+  schedule: [[0, 4], [600, 100], [1200, 260], [1800, 450], [2400, 300], [3000, 120], [3600, 4]]
+train:
+  arrival_times_s: [600, 960, 1320, 1680, 2040, 2400, 2760, 3120, 3480]

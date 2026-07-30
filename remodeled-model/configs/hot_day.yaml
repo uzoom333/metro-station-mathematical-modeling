@@ -1,0 +1,9 @@
+extends: baseline.yaml
+metadata:
+  name: hot_day
+  description: Synthetic hot outdoor condition.
+outdoor:
+  temperature_C: 35.0
+initial_conditions:
+  air_temperature_C: 29.0
+  structure_temperature_C: 28.0
