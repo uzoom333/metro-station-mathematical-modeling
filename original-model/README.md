@@ -11,7 +11,7 @@ ventilation and thermal conditions could be represented mathematically. The
 system combined human occupancy, a train entering the station, air renewal,
 temperature, and the finite volume of the station.
 
-## Modeling methodology
+## Modeling Methodology
 
 The original reasoning followed a clear undergraduate mathematical-modeling
 workflow:

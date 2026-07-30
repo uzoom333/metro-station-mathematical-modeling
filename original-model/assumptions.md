@@ -20,7 +20,7 @@ Equations and Calculus II. The assumptions preserved in Version 1 are:
 8. **Simplified engineering system:** the hypothetical station is simplified
    enough to support logical decomposition and coupled differential equations.
 
-## Use in the repository example
+## Use in the Repository Example
 
 The Python example makes additional computational choices—such as a
 well-mixed-air approximation, constant air properties, constant outside

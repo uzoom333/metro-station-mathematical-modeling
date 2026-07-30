@@ -1,6 +1,6 @@
 # Scope and Limitations
 
-## Original project scope
+## Original Project Scope
 
 The project was created for a mathematical modeling challenge. Its purpose was
 to demonstrate logical reasoning, sound assumptions, mathematical
@@ -11,7 +11,7 @@ It was not intended to provide a complete engineering design, certify a
 ventilation system, or establish operational and safety requirements for a real
 station.
 
-## Version 1 computational limitations
+## Version 1 Computational Limitations
 
 The current Python example translates the preserved modeling approach into a
 small, readable simulation. For that purpose, it:

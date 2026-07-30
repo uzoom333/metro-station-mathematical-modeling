@@ -15,7 +15,7 @@ This coupled-equation approach is preserved in Version 1: individual physical
 contributions are defined, combined through balance reasoning, and used to
 describe temperature change.
 
-## Illustrative formulation
+## Illustrative Formulation
 
 The exact historical equations and notation are not available. The formulation
 below is an illustrative expression of the preserved approach, not a claim
@@ -23,55 +23,59 @@ about the precise formulas written in the 2024 submission.
 
 Let:
 
-- \(T(t)\) be average station-air temperature;
-- \(T_{\text{out}}\) be outside-air temperature;
-- \(V\) be effective station-air volume;
-- \(\rho\) be air density;
-- \(c_p\) be the specific heat capacity of air;
-- \(\dot V\) be ventilation volumetric flow rate;
-- \(N\) be minimum passenger occupancy;
-- \(q_p\) be average heat released per passenger; and
-- \(Q_{\text{train}}(t)\) be heat associated with the arriving train.
+- $T(t)$ be average station-air temperature;
+- $T_{\text{out}}$ be outside-air temperature;
+- $V$ be effective station-air volume;
+- $\rho$ be air density;
+- $c_p$ be the specific heat capacity of air;
+- $\dot V$ be ventilation volumetric flow rate;
+- $N$ be minimum passenger occupancy;
+- $q_p$ be average heat released per passenger; and
+- $Q_{\text{train}}(t)$ be heat associated with the arriving train.
 
-An illustrative passenger heat term is
+Passenger heat is represented by combining the minimum occupancy with an
+average heat contribution per passenger:
 
-\[
+$$
 Q_{\text{passengers}} = N q_p.
-\]
+$$
 
-An illustrative air-renewal term is
+The air-renewal term expresses the thermal effect of ventilation through the
+air properties, airflow rate, and difference between station and outdoor
+temperatures:
 
-\[
+$$
 Q_{\text{ventilation}}
   = \rho c_p \dot V \left(T(t) - T_{\text{out}}\right).
-\]
+$$
 
-These contributions can be coupled in an illustrative lumped energy balance:
+Passenger heat, train heat, and ventilation can then be combined in an
+illustrative lumped energy balance:
 
-\[
+$$
 \rho c_p V \frac{dT}{dt}
   = Q_{\text{passengers}}
   + Q_{\text{train}}(t)
   - Q_{\text{ventilation}}.
-\]
+$$
 
-Equivalently,
+Solving the balance for the temperature rate gives the equivalent form:
 
-\[
+$$
 \frac{dT}{dt}
   =
   \frac{
     Nq_p + Q_{\text{train}}(t)
     - \rho c_p \dot V(T-T_{\text{out}})
   }{\rho c_p V}.
-\]
+$$
 
 For the newly developed Python example, the equation is advanced with the
 explicit Euler method:
 
-\[
+$$
 T_{k+1} = T_k + \Delta t\, f(t_k, T_k).
-\]
+$$
 
 Euler integration is an implementation choice for this repository, not a
 documented detail of the original project. No historical numerical result,
