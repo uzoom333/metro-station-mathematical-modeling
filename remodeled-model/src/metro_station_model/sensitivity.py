@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+from concurrent.futures import ProcessPoolExecutor
 from copy import deepcopy
 from pathlib import Path
 
@@ -83,13 +85,29 @@ def _variant(config: ModelConfig, name: str, value: float) -> ModelConfig:
     return ModelConfig(data, config.source)
 
 
+def _calculate_metrics(payload: tuple[dict, str]) -> dict:
+    data, source = payload
+    return summary_metrics(simulate(ModelConfig(data, Path(source))))
+
+
+def _parallel_metrics(configs: list[ModelConfig]) -> list[dict]:
+    workers = min(8, os.cpu_count() or 1)
+    payloads = [(config.data, str(config.source)) for config in configs]
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        return list(executor.map(_calculate_metrics, payloads, chunksize=2))
+
+
 def run_oat(config: ModelConfig) -> pd.DataFrame:
     """Run five deterministic levels for each configured parameter range."""
-    rows = []
+    inputs = []
     for name, (low, high) in PARAMETER_RANGES.items():
         for level, value in enumerate(np.linspace(low, high, 5)):
-            metrics = summary_metrics(simulate(_variant(config, name, float(value))))
-            rows.append({"parameter": name, "level": level, "value": value, **metrics})
+            inputs.append((name, level, value, _variant(config, name, float(value))))
+    calculated = _parallel_metrics([item[3] for item in inputs])
+    rows = [
+        {"parameter": name, "level": level, "value": value, **metrics}
+        for (name, level, value, _), metrics in zip(inputs, calculated, strict=True)
+    ]
     return pd.DataFrame(rows)
 
 
@@ -104,17 +122,25 @@ def run_latin_hypercube(config: ModelConfig, samples: int = 500) -> pd.DataFrame
     values = qmc.scale(
         qmc.LatinHypercube(len(names), seed=seed).random(samples), lower, upper
     )
-    rows = []
-    for sample_index, sample in enumerate(values):
+    configs = []
+    for sample in values:
         data = deepcopy(config.data)
         for name, value in zip(names, sample, strict=True):
             _set_parameter(
                 data, name, float(value), config.data["station"]["volume_m3"]
             )
-        metrics = summary_metrics(simulate(ModelConfig(data, config.source)))
-        rows.append(
-            {"sample": sample_index, **dict(zip(names, sample, strict=True)), **metrics}
+        configs.append(ModelConfig(data, config.source))
+    calculated = _parallel_metrics(configs)
+    rows = [
+        {
+            "sample": sample_index,
+            **dict(zip(names, sample, strict=True)),
+            **metrics,
+        }
+        for sample_index, (sample, metrics) in enumerate(
+            zip(values, calculated, strict=True)
         )
+    ]
     return pd.DataFrame(rows)
 
 
@@ -149,7 +175,10 @@ def save_sensitivity(
 
     fig, axes = plt.subplots(2, 2, figsize=(10, 8))
     for output, axis in zip(OUTPUTS, axes.flat, strict=True):
-        axis.hist(lhs[output], bins=25)
+        values = lhs[output].to_numpy()
+        scale = max(float(np.max(np.abs(values))), 1.0)
+        bins: str | int = 1 if np.ptp(values) <= np.finfo(float).eps * scale else "auto"
+        axis.hist(values, bins=bins)
         axis.set(title=output.replace("_", " "))
     fig.tight_layout()
     fig.savefig(target / "output_histograms.png", dpi=160)

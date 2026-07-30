@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+from concurrent.futures import ProcessPoolExecutor
 from copy import deepcopy
 from itertools import product
 from pathlib import Path
@@ -22,9 +24,14 @@ TEMPERATURE_GAINS = [0, 2, 4, 6, 8]
 CO2_GAINS = [0, 0.02, 0.04, 0.06, 0.08]
 
 
+def _calculate_metrics(payload: tuple[dict, str]) -> dict:
+    data, source = payload
+    return summary_metrics(simulate(ModelConfig(data, Path(source))))
+
+
 def run_optimization(config: ModelConfig) -> pd.DataFrame:
     """Evaluate the full controller grid using demonstration constraints."""
-    rows = []
+    inputs = []
     for base, maximum, temperature_gain, co2_gain in product(
         BASE_FLOWS, MAXIMUM_FLOWS, TEMPERATURE_GAINS, CO2_GAINS
     ):
@@ -36,7 +43,15 @@ def run_optimization(config: ModelConfig) -> pd.DataFrame:
         vent["maximum_airflow_m3_s"] = float(maximum)
         vent["temperature_gain_m3_s_per_K"] = float(temperature_gain)
         vent["co2_gain_m3_s_per_ppm"] = float(co2_gain)
-        metrics = summary_metrics(simulate(ModelConfig(data, config.source)))
+        inputs.append((base, maximum, temperature_gain, co2_gain, data))
+    workers = min(8, os.cpu_count() or 1)
+    payloads = [(data, str(config.source)) for *_, data in inputs]
+    with ProcessPoolExecutor(max_workers=workers) as executor:
+        calculated = list(executor.map(_calculate_metrics, payloads, chunksize=4))
+    rows = []
+    for (base, maximum, temperature_gain, co2_gain, _), metrics in zip(
+        inputs, calculated, strict=True
+    ):
         feasible = (
             metrics["maximum_air_temperature_C"] <= 29.0
             and metrics["maximum_co2_ppm"] <= 1200.0
