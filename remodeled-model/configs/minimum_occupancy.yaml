@@ -1,0 +1,8 @@
+extends: baseline.yaml
+metadata:
+  name: minimum_occupancy
+  description: Fixed minimum occupancy, no trains, demand-controlled ventilation.
+occupancy:
+  schedule: [[0, 4], [3600, 4]]
+train:
+  arrival_times_s: []

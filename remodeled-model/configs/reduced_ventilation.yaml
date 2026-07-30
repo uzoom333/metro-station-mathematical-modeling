@@ -1,0 +1,7 @@
+extends: baseline.yaml
+metadata:
+  name: reduced_ventilation
+  description: Reduced illustrative controller capacity.
+ventilation:
+  base_airflow_m3_s: 15.0
+  maximum_airflow_m3_s: 50.0

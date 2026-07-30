@@ -1,0 +1,7 @@
+extends: baseline.yaml
+metadata:
+  name: fixed_ventilation
+  description: Baseline schedules with fixed mechanical airflow.
+ventilation:
+  mode: fixed
+  fixed_airflow_m3_s: 35.0
