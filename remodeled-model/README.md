@@ -1,21 +1,21 @@
 # Version 2: Remodeled Model
 
-This directory is reserved for a future redevelopment of the metro-station
-model. Version 2 will expand the repository-created reconstruction using modern
-numerical simulation and software engineering practices while preserving a
-clear separation from the historical Version 1 reconstruction.
+Version 2 will extend the award-winning project's preserved mathematical
+reasoning with modern numerical simulation and software engineering practices.
+It will remain separate from Version 1 so that historical documentation and
+new development have clear roles.
 
 Possible future work includes:
 
 - configurable station, passenger, train, and ventilation scenarios;
+- sourced parameters and explicit unit handling;
 - more capable and tested numerical integration;
 - separate thermal, airflow, occupancy, and train subsystems;
-- parameter validation, units, and documented data sources;
 - sensitivity and uncertainty analysis;
 - automated tests, reproducible experiments, and result visualization; and
-- comparison against measurements or credible reference cases when available.
+- comparison with measurements or credible reference cases if suitable data
+  become available.
 
-No Version 2 model has been implemented yet. Future work must continue to
-distinguish new development from the content remembered from the 2024 awarded
-project. The original award must not be attributed to any future Version 2
-equations, code, simulations, or results.
+No Version 2 model has been implemented. Its future equations, code,
+simulations, and results will be new extensions, not claims about details of
+the 2024 submission.

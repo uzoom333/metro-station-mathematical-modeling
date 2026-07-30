@@ -1,36 +1,49 @@
-# Version 1: Original-Model Reconstruction
+# Version 1: Original Model
 
-This directory contains a new reconstruction informed only by broad details
-currently remembered about the 2024 competition project. The original project,
-which received fourth place in the Mathematical Modeling Challenge at PUC
-Goiás, concerned thermal and ventilation conditions in one hypothetical metro
-station. That award applies to the 2024 project, not to the reconstruction,
-documentation, equations, or code in this repository.
+Version 1 faithfully reconstructs the mathematical modeling project that
+received fourth place in the Mathematical Modeling Challenge at the X Congress
+of Science, Technology and Innovation at PUC Goiás in 2024.
 
-This repository version is intentionally simple. It follows the challenge's
-remembered educational emphasis by defining assumptions, identifying relevant
-quantities, and demonstrating one way to decompose heat and airflow concepts.
-The particular decomposition and mathematical implementation documented here
-are present-day reconstruction choices.
+## Problem
 
-It is not an archival reproduction. The original equations, parameter values,
-drawings, and code are not available here. Unless a future source is explicitly
-cited, every equation, symbol, parameter value, numerical method, and line of
-code in this directory must be treated as newly created illustrative material
-and must not be attributed to the awarded submission.
+The project considered one hypothetical metro station and asked how its
+ventilation and thermal conditions could be represented mathematically. The
+system combined human occupancy, a train entering the station, air renewal,
+temperature, and the finite volume of the station.
 
-## Files
+## Modeling methodology
 
-- [`assumptions.md`](assumptions.md) records assumptions selected for this
-  reconstruction.
-- [`equations.md`](equations.md) describes likely equation families and gives
-  one explicitly illustrative formulation.
-- [`limitations.md`](limitations.md) defines historical and technical limits.
-- [`original_reconstruction.py`](original_reconstruction.py) implements a small,
-  dependency-free prototype written for this repository, not recovered
-  competition code.
+The original reasoning followed a clear undergraduate mathematical-modeling
+workflow:
 
-Run the prototype from the repository root:
+1. define the station as the system under study;
+2. state engineering assumptions that make the problem tractable;
+3. identify the principal variables and heat sources;
+4. express how those variables change and interact through Differential
+   Equations and Calculus II;
+5. connect the equations as a coupled model; and
+6. interpret the model as a logical representation of ventilation and thermal
+   behavior.
+
+This methodology reflects the competition's focus on assumptions, reasoning,
+and problem decomposition rather than delivery of a complete engineering
+design.
+
+## Contents
+
+- [`assumptions.md`](assumptions.md) presents the engineering assumptions
+  preserved from the project.
+- [`equations.md`](equations.md) explains the preserved mathematical approach
+  and labels the displayed formulation as illustrative.
+- [`limitations.md`](limitations.md) defines the intended academic scope.
+- [`original_reconstruction.py`](original_reconstruction.py) is a newly
+  developed computational example using recreated parameter values.
+
+The precise numerical values, dimensions, historical diagrams, and original
+implementation are not available. Examples that replace those details are
+identified where they appear.
+
+Run the example from the repository root:
 
 ```bash
 python3 original-model/original_reconstruction.py

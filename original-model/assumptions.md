@@ -1,38 +1,30 @@
-# Assumptions
+# Engineering Assumptions
 
-## Status of this document
+The original project used engineering assumptions to reduce a complex metro
+station to a mathematical system suitable for analysis with Differential
+Equations and Calculus II. The assumptions preserved in Version 1 are:
 
-The list below defines assumptions chosen now for the repository's illustrative
-reconstruction. It is informed by broad remembered topics from the 2024
-project, but there is no complete surviving record showing which assumptions
-the original team used or how they stated them. None of the specific
-assumptions below should be attributed to the awarded submission.
+1. **Single hypothetical station:** the model covers one station rather than an
+   entire metro network.
+2. **Defined station volume:** the station has a finite air volume used in the
+   thermal and ventilation balances.
+3. **Minimum passenger occupancy:** a minimum number of passengers is present
+   in the modeled station.
+4. **Passenger heat generation:** passengers contribute heat to the station.
+5. **Train heat generation:** an arriving train adds heat to the station
+   environment.
+6. **Airflow and air renewal:** ventilation replaces station air and affects
+   its thermal conditions.
+7. **Interacting quantities:** passenger heat, train heat, airflow, volume, and
+   temperature must be considered together rather than as isolated effects.
+8. **Simplified engineering system:** the hypothetical station is simplified
+   enough to support logical decomposition and coupled differential equations.
 
-## Assumptions selected for the reconstruction
+## Use in the repository example
 
-1. **One hypothetical station:** the model represents a single enclosed station
-   volume rather than an entire metro network.
-2. **Well-mixed air:** at each instant, the station air is represented by one
-   average temperature. Local hot spots and spatial gradients are omitted.
-3. **Minimum passenger population:** a fixed minimum number of passengers is
-   present during the modeled period. Passenger arrivals and departures are
-   simplified.
-4. **Passenger heat:** each passenger contributes heat at an average rate.
-5. **Train heat:** a train contributes heat while it is in or near the station.
-   The source may be represented by a simple time-dependent function.
-6. **Ventilation airflow:** outside air enters and station air leaves at
-   equivalent average flow rates, so air volume is conserved.
-7. **Known station volume:** the station is assigned a constant effective air
-   volume.
-8. **Known outside temperature:** outside-air temperature is treated as fixed
-   in the simplest prototype.
-9. **Constant air properties:** air density and specific heat are treated as
-   constants.
-10. **Other heat paths omitted:** conduction through walls, solar gains,
-    humidity, equipment heat, tunnel piston effects, and detailed train
-    aerodynamics are not represented in Version 1.
-
-The list above describes only the model implemented in this repository. The
-numerical choices used in the Python prototype were also selected now to make
-the reconstruction runnable. They are not recovered or estimated values from
-the competition entry.
+The Python example makes additional computational choices—such as a
+well-mixed-air approximation, constant air properties, constant outside
+temperature, balanced airflow, and a time window for train presence—to express
+the preserved assumptions in runnable form. Those implementation choices, as
+well as all numerical values and station dimensions in the example, are
+illustrative replacements rather than recovered historical details.

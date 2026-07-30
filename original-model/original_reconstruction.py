@@ -1,22 +1,19 @@
-"""Illustrative reconstruction of a metro-station temperature model.
+"""Computational example of the original metro-station modeling approach.
 
-This file was newly written for this repository after the competition. It is
-not recovered or adapted original 2024 competition code. The original
-equations, algorithm, code, and numerical values are unavailable here. Every
-function, formula, numerical method, and numerical value below is illustrative
-and must not be attributed to the awarded submission.
-
-The prototype uses only the Python standard library.
+The problem decomposition, variables, and coupled-equation approach reflect
+the 2024 project. This Python implementation and its numerical values were
+newly developed for the repository because the historical implementation and
+values are not available.
 """
 
 
 def passenger_heat(passenger_count, heat_per_passenger_w):
-    """Return illustrative passenger sensible heat in watts."""
+    """Return passenger sensible heat in watts."""
     return passenger_count * heat_per_passenger_w
 
 
 def train_heat(time_s, arrival_s, departure_s, heat_output_w):
-    """Return the reconstruction's illustrative train heat source."""
+    """Return a simplified train heat source while the train is present."""
     if arrival_s <= time_s < departure_s:
         return heat_output_w
     return 0.0
@@ -29,7 +26,7 @@ def ventilation_heat_loss(
     air_specific_heat_j_kg_k,
     airflow_m3_s,
 ):
-    """Return illustrative heat removed by ventilation in watts.
+    """Return heat removed by ventilation in watts.
 
     A negative result means that ventilation adds heat because the outside air
     is warmer than the station air.
@@ -57,7 +54,7 @@ def temperature_rate(
     air_specific_heat_j_kg_k,
     airflow_m3_s,
 ):
-    """Return the illustrative station temperature rate in degrees C/second."""
+    """Return the station temperature rate in degrees C/second."""
     heat_from_passengers = passenger_heat(
         passenger_count, heat_per_passenger_w
     )
@@ -80,7 +77,7 @@ def temperature_rate(
 
 
 def simulate(initial_temperature_c, duration_s, time_step_s, parameters):
-    """Simulate the illustrative balance with the explicit Euler method."""
+    """Simulate the coupled balance with the explicit Euler method."""
     time_s = 0.0
     temperature_c = initial_temperature_c
     samples = [(time_s, temperature_c)]
@@ -100,9 +97,8 @@ def simulate(initial_temperature_c, duration_s, time_step_s, parameters):
 
 
 def main():
-    # These values were selected for this repository only. They are not
-    # recovered, estimated, or adapted values from the award-winning 2024
-    # submission, and the output must not be presented as an original result.
+    # All values and dimensions below are illustrative examples created for
+    # this repository; they are not historical competition parameters.
     parameters = {
         "passenger_count": 100,
         "heat_per_passenger_w": 100.0,
@@ -123,7 +119,7 @@ def main():
         parameters=parameters,
     )
 
-    print("Repository-created illustration — not original equations or results")
+    print("Version 1 computational example (illustrative parameters)")
     print("Time (min) | Station temperature (°C)")
     print("-" * 38)
     for time_s, temperature_c in samples:

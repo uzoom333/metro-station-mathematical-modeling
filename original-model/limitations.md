@@ -1,37 +1,37 @@
-# Limitations
+# Scope and Limitations
 
-## Historical limitations
+## Original project scope
 
-- Version 1 is a new reconstruction informed by broad remembered project
-  details.
-- Some exact equations, values, diagrams, and presentation materials from the
-  2024 submission are unavailable.
-- The documents do not establish that any illustrative equation, value,
-  algorithm, code, or detailed assumption matches the original work.
-- All such material in this repository must be treated as newly created unless
-  a future surviving source is explicitly cited.
-- The fourth-place award belongs to the 2024 project, not to this
-  reconstruction or its code and results.
+The project was created for a mathematical modeling challenge. Its purpose was
+to demonstrate logical reasoning, sound assumptions, mathematical
+decomposition, and the use of coupled differential equations to represent the
+ventilation and thermal conditions of a hypothetical metro station.
 
-## Limitations of the illustrative reconstruction
+It was not intended to provide a complete engineering design, certify a
+ventilation system, or establish operational and safety requirements for a real
+station.
 
-- This repository's prototype reduces the station to one well-mixed air volume.
-- Spatial temperature and airflow distributions are ignored.
-- Passenger behavior and train operation are greatly simplified.
-- Humidity, radiative exchange, wall conduction, equipment loads, solar gains,
-  air leakage, and detailed tunnel effects are omitted.
-- Air properties, outside temperature, and ventilation rate are constant.
-- Illustrative parameters are not calibrated against measurements.
-- The simple Euler integrator has numerical error and no automatic stability
-  control.
-- No sensitivity, uncertainty, or validation study is included.
+## Version 1 computational limitations
 
-These limitations describe the repository-created prototype and must not be
-read as a list of defects or features of the original submission. The
-prototype supports learning and discussion of mathematical reasoning. It is
-not suitable for ventilation sizing, safety analysis, regulatory compliance,
-or other engineering decisions.
+The current Python example translates the preserved modeling approach into a
+small, readable simulation. For that purpose, it:
 
-Version 2 is intended to address some of these limitations through better data
-organization, configurable scenarios, tested numerical methods, validation,
-uncertainty analysis, and modern software engineering practices.
+- represents the station as one well-mixed air volume;
+- omits spatial temperature and airflow distributions;
+- simplifies passenger and train behavior;
+- omits humidity, radiation, wall conduction, equipment loads, solar gains,
+  leakage, and detailed tunnel effects;
+- uses constant air properties, outside temperature, and airflow;
+- uses recreated parameters that have not been calibrated against
+  measurements;
+- uses a basic Euler integrator without automatic error or stability control;
+  and
+- includes no sensitivity, uncertainty, or validation study.
+
+These computational limitations describe the repository example, not
+additional claims about the 2024 submission. The example is suitable for
+explaining the mathematical structure, but not for engineering decisions.
+
+Version 2 may address these limitations with sourced parameters, configurable
+scenarios, tested numerical methods, uncertainty analysis, validation, and
+modern software engineering practices.
