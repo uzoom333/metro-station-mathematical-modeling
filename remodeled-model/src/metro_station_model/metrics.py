@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 import numpy as np
+from scipy.integrate import trapezoid
 
 from .solver import SimulationResult
 
 
 def _integral(values: np.ndarray, times: np.ndarray) -> float:
-    return float(np.trapezoid(values, times))
+    return float(trapezoid(values, times))
 
 
 def summary_metrics(result: SimulationResult) -> dict[str, float | bool | int | str]:

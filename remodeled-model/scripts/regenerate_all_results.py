@@ -4,6 +4,7 @@ from pathlib import Path
 
 from metro_station_model.config import load_config
 from metro_station_model.optimization import run_optimization, save_optimization
+from metro_station_model.results import save_result
 from metro_station_model.scenarios import run_all_scenarios
 from metro_station_model.sensitivity import (
     run_latin_hypercube,
@@ -37,6 +38,7 @@ def main() -> None:
     clear_generated_results()
     config = load_config(ROOT / "configs/baseline.yaml")
     scenarios, summary = run_all_scenarios(ROOT / "configs", RESULTS / "scenarios")
+    save_result(scenarios["baseline"], RESULTS / "baseline")
     save_sensitivity(
         run_oat(config), run_latin_hypercube(config, 500), RESULTS / "sensitivity"
     )
