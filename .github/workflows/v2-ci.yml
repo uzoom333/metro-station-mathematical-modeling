@@ -1,0 +1,37 @@
+name: Version 2 CI
+
+on:
+  push:
+    paths:
+      - "remodeled-model/**"
+      - ".github/workflows/v2-ci.yml"
+  pull_request:
+    paths:
+      - "remodeled-model/**"
+      - ".github/workflows/v2-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    defaults:
+      run:
+        working-directory: remodeled-model
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: remodeled-model/pyproject.toml
+      - run: python -m pip install -e ".[dev]"
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: pytest
+      - name: Baseline smoke simulation
+        run: metro-station simulate --config configs/baseline.yaml --output /tmp/v2-smoke

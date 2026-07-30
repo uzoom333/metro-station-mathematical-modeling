@@ -1,0 +1,14 @@
+{
+  "absolute_tolerance": 1e-09,
+  "data_status": "synthetic_illustrative",
+  "engineering_validation": false,
+  "generation_timestamp_utc": "2026-07-30T22:06:34.635224+00:00",
+  "model_version": "2.0.0",
+  "original_submission_data": false,
+  "random_seed": 2024,
+  "relative_tolerance": 1e-07,
+  "scenario": "hot_day",
+  "solver": "RK45",
+  "solver_function_evaluations": 15374,
+  "solver_success": true
+}

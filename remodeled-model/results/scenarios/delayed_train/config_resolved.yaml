@@ -1,0 +1,90 @@
+metadata:
+  name: delayed_train
+  description: Extended illustrative train dwell with baseline passengers.
+  data_status: synthetic_illustrative
+  engineering_validation: false
+  original_submission_data: false
+station:
+  length_m: 120.0
+  width_m: 18.0
+  average_height_m: 6.0
+  volume_m3: 12960.0
+thermal:
+  passenger_sensible_heat_W_per_person: 75.0
+  equipment_heat_W: 20000.0
+  train_heat_W: 250000.0
+  train_residual_heat_initial_W: 120000.0
+  train_residual_decay_time_s: 180.0
+  air_structure_conductance_W_per_K: 40000.0
+  structure_outdoor_UA_W_per_K: 5000.0
+  structure_thermal_capacitance_J_per_K: 1200000000.0
+air_quality:
+  outdoor_co2_ppm: 420.0
+  initial_co2_ppm: 600.0
+  passenger_co2_generation_L_per_s_person: 0.004
+  conversion_reference_temperature_K: 298.15
+outdoor:
+  temperature_C: 30.0
+  pressure_Pa: 101325.0
+initial_conditions:
+  air_temperature_C: 26.0
+  structure_temperature_C: 25.5
+  pressure_Pa: 101325.0
+  co2_ppm: 600.0
+  ventilation_airflow_m3_s: 25.0
+ventilation:
+  mode: demand_controlled
+  minimum_airflow_m3_s: 10.0
+  base_airflow_m3_s: 25.0
+  maximum_airflow_m3_s: 100.0
+  fixed_airflow_m3_s: 35.0
+  temperature_setpoint_C: 26.5
+  co2_setpoint_ppm: 1000.0
+  temperature_gain_m3_s_per_K: 6.0
+  co2_gain_m3_s_per_ppm: 0.05
+  actuator_time_constant_s: 30.0
+  leakage_coefficient_m3_s_sqrt_Pa: 0.35
+occupancy:
+  minimum_passengers: 4
+  schedule:
+  - - 0
+    - 4
+  - - 600
+    - 60
+  - - 1200
+    - 160
+  - - 1800
+    - 300
+  - - 2400
+    - 220
+  - - 3000
+    - 100
+  - - 3600
+    - 4
+train:
+  arrival_times_s:
+  - 900
+  - 1500
+  - 2100
+  - 2700
+  - 3300
+  dwell_time_s: 240.0
+  direct_heat_W: 250000.0
+  residual_heat_initial_W: 120000.0
+  residual_decay_time_s: 180.0
+  piston_airflow_m3_s: 20.0
+  piston_event_duration_s: 60.0
+fan:
+  reference_power_W: 75000.0
+  reference_airflow_m3_s: 50.0
+failure:
+  start_time_s: null
+  maximum_airflow_m3_s: null
+simulation:
+  start_time_s: 0.0
+  end_time_s: 3600.0
+  output_step_s: 5.0
+  method: RK45
+  relative_tolerance: 1.0e-07
+  absolute_tolerance: 1.0e-09
+  random_seed: 2024
